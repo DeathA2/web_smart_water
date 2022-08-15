@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:web_smart_water/ui/screen/main/home.dart';
+import 'package:web_smart_water/ui/screen/main/splash.dart';
 
 import '../controller/app_controller.dart';
+import '../ui/screen/main/permission_denied.dart';
 class RouteConfig{
   static final List<RouteToPage> _routeToPage = [
     // RouteToPage(name: '/', page: const SplashScreen(),roles: []),
@@ -10,7 +13,7 @@ class RouteConfig{
     //     desktopBody: const LogInPage(),
     //     mobileBody: const LogInMobilePage()), roles: []
     // ),
-    // RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
     // RouteToPage(name: '/cau_hinh', page: ConfigScreen(),roles: ['admin','operation','manager']),
     // RouteToPage(name: '/cau_hinh_danh_muc', page: ConfigScreen(),roles: ['admin','operation','manager']),
     // RouteToPage(name: '/cau_hinh_tai_khoan', page: ConfigAccountScreen(),roles: ['admin','operation','manager']),
@@ -53,18 +56,17 @@ class RouteConfig{
   //   RouteModel(route: '/qr_code', label: 'QR Code',children: [],group: '/qr_code',screen: const QrCodeScreen()),
 
   ];
-  // List<GetPage> get getRoute => [
-  //   GetPage(name: '/order', page: () => ResponsiveOrderPage(desktopBody: const OrderPage(), mobileBody: const OrderMobilePage())),
-  //   GetPage(name: '/search_order', page: () => const SearchOrderPage()),
-  //   GetPage(name : '/dang_ky_don_hang', page: () => const AddProduct()),
-  //   GetPage(name : '/test', page: () => const ToastMotion()),
-  //   GetPage(name : '/', page: () => const SplashScreen()),
-  //   GetPage(name : '/home', page: () => HomeScreen()),
-  //   GetPage(name : '/permission_denied', page: () => const PermissionDeniedScreen()),
-  //   GetPage(name : '/login', page: () => ResponsiveLoginPage(
-  //       desktopBody: const LogInPage(),
-  //       mobileBody: const LogInMobilePage())),
-  // ];
+  List<GetPage> get getRoute => [
+    // GetPage(name: '/order', page: () => ResponsiveOrderPage(desktopBody: const OrderPage(), mobileBody: const OrderMobilePage())),
+    // GetPage(name: '/search_order', page: () => const SearchOrderPage()),
+    // GetPage(name : '/dang_ky_don_hang', page: () => const AddProduct()),
+    GetPage(name : '/', page: () => const SplashScreen()),
+    GetPage(name : '/home', page: () => HomeScreen()),
+    GetPage(name : '/permission_denied', page: () => const PermissionDeniedScreen()),
+    // GetPage(name : '/login', page: () => ResponsiveLoginPage(
+    //     desktopBody: const LogInPage(),
+    //     mobileBody: const LogInMobilePage())),
+  ];
   // List<GetPage> get getRoute => _route;
   List<RouteModel> getNavbar (){
     List<RouteModel> list = [];

@@ -9,6 +9,7 @@ import 'package:web_smart_water/api/api.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/controller/loading_controller.dart';
 import 'package:web_smart_water/controller/notification_controller.dart';
+import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 import 'package:web_smart_water/utils/session_storage_helper.dart';
 typedef void MenuCallback(ObjectKey);
@@ -29,7 +30,7 @@ class AppController extends GetxController{
       label: 'Thống kê xuất nhập',
       group: '/thong_ke',
       children: [],
-      screen: const DashboardInOutScreen())
+      screen: HomeScreen())
       .obs;
   List<String> listCustomer =[];
   List<String> listCodeBuy =[];
@@ -187,7 +188,7 @@ class AppController extends GetxController{
                   label: 'Thống kê xuất nhập',
                   group: '/thong_ke',
                   children: [],
-                  screen: const DashboardInOutScreen()));
+                  screen: HomeScreen()));
             }
           }
           isLoading.value = false;
@@ -214,7 +215,7 @@ class AppController extends GetxController{
         label: 'Thống kê xuất nhập',
         group: '/thong_ke',
         children: [],
-        screen: const DashboardInOutScreen());
+        screen: HomeScreen());
   }
 }
 final AppController appController = Get.put(AppController());
