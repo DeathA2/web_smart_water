@@ -7,24 +7,21 @@ import '../controller/app_controller.dart';
 import '../ui/screen/main/permission_denied.dart';
 class RouteConfig{
   static final List<RouteToPage> _routeToPage = [
-    // RouteToPage(name: '/', page: const SplashScreen(),roles: []),
-    // RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
+    RouteToPage(name: '/', page: const SplashScreen(),roles: []),
+    RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
     // RouteToPage(name: '/login', page: ResponsiveLoginPage(
     //     desktopBody: const LogInPage(),
     //     mobileBody: const LogInMobilePage()), roles: []
     // ),
     RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
-    // RouteToPage(name: '/cau_hinh', page: ConfigScreen(),roles: ['admin','operation','manager']),
-    // RouteToPage(name: '/cau_hinh_danh_muc', page: ConfigScreen(),roles: ['admin','operation','manager']),
-    // RouteToPage(name: '/cau_hinh_tai_khoan', page: ConfigAccountScreen(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/cau_hinh', page: Container(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/cau_hinh_tai_khoan', page: Container(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/danh_sach_duong_pho', page: Container(),roles: ['admin','operation','manager']),
   ];
   final List<GetPage> _route = _routeToPage.map((route) => GetPage(name: route.name, page: () => route.page)).toList();
 
   final List<RouteModel> _navbar = [
-  //   RouteModel(route: '/thong_ke', label: 'Thống kê',group: '/thong_ke',children: [
-  //     RouteModel(route: '/thong_ke_xuat_nhap', label: 'Thống kê xuất nhập',group: '/thong_ke',children: [],screen: const DashboardInOutScreen()),
-  //     RouteModel(route: '/thong_ke_van_chuyen', label: 'Thống kê vận chuyển',group: '/thong_ke',children: [],screen: const DashboardTransportScreen()),
-  //   ],screen: Container()),
   //   RouteModel(route: '/bao_cao', label: 'Báo cáo',group: '/bao_cao',screen: const ListReportScreen(),children: [
   //     RouteModel(route: '/bao_cao_nhap_kho', label: 'Báo cáo nhập kho',group: '/bao_cao',children: [],screen: const ReportImportScreen()),
   //     RouteModel(route: '/bao_cao_xuat_kho', label: 'Báo cáo xuất kho',group: '/bao_cao',children: [],screen: const ReportExportScreen()),
@@ -35,24 +32,12 @@ class RouteConfig{
   //     RouteModel(route: '/bao_cao_thong_tin_kho', label: 'Báo cáo tồn kho',group: '/bao_cao',children: [],screen: const ReportWareHouseScreen()),
   //     RouteModel(route: '/bao_cao_thong_tin_don_hang', label: 'Báo cáo thông tin đơn hàng',group: '/bao_cao',children: [],screen: const ReportOrderScreen()),
   //   ]),
-  //   RouteModel(route: '/bien_ban', label: 'Biên bản',children: [],group: '/bien_ban',screen: const RecordScreen()),
-  //   RouteModel(route: '/cau_hinh', label: 'Cấu hình',group: '/cau_hinh',children: [
-  //     RouteModel(route: '/cau_hinh_danh_muc', label: 'Cấu hình danh mục',group: '/cau_hinh',children: [],screen: ConfigScreen()),
-  //     RouteModel(route: '/cau_hinh_tai_khoan', label: 'Cấu hình tài khoản',group: '/cau_hinh',children: [],screen: ConfigAccountScreen()),
-  //   ],screen: Container()),
-  //   RouteModel(route: '/chot_so', label: 'Chốt số',group: '/chot_so',screen: const ListReportFinalizationScreen(),children: [
-  //     RouteModel(route: '/bao_cao_chot_so_nhap', label: 'Báo cáo chi tiết nhập kho',group: '/chot_so',children: [],screen: const ReportImportFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_xuat', label: 'Báo cáo chi tiết xuất kho',group: '/chot_so',children: [],screen: const ReportExportFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_xuat_nhap_ton', label: 'Báo cáo chi tiết nhập xuất tồn',group: '/chot_so',children: [],screen: const ReportInventoryFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_boc_do', label: 'Báo cáo chi tiết bốc dỡ theo thiết bị',group: '/chot_so',children: [],screen: const ReportTransportFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_boc_tb', label: 'Báo cáo chi tiết bốc theo thiết bị',group: '/chot_so',children: [],screen: const ReportDstDeviceFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_do_tb', label: 'Báo cáo chi tiết dỡ theo thiết bị',group: '/chot_so',children: [],screen: const ReportSrcDeviceFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_boc_do_luy_ke', label: 'Báo cáo chi tiết bốc dỡ theo thiết bị có lũy kế',group: '/chot_so',children: [],screen: const ReportDeviceCumulativeFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_boc_tb_luy_ke', label: 'Báo cáo chi tiết bốc theo thiết bị có lũy kế',group: '/chot_so',children: [],screen: const ReportFinalizationDeviceCumulativeDstScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_do_tb_luy_ke', label: 'Báo cáo chi tiết dỡ theo thiết bị có lũy kế',group: '/chot_so',children: [],screen: const ReportFinalizationDeviceCumulativeSrcScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_bao_loi', label: 'Báo cáo chi tiết bao lỗi',group: '/chot_so',children: [],screen: const ReportErrorFinalizationScreen()),
-  //     RouteModel(route: '/bao_cao_chot_so_ton_dau', label: 'Báo cáo chi tiết tồn kho',group: '/chot_so',children: [],screen: const ReportInventoryBeginFinalizationScreen()),
-  //   ]),
+    RouteModel(route: '/cau_hinh', label: 'Cấu hình',group: '/cau_hinh',children: [
+      RouteModel(route: '/cau_hinh_danh_muc', label: 'Cấu hình danh mục',group: '/cau_hinh',children: [],screen: Container()),
+      RouteModel(route: '/cau_hinh_tai_khoan', label: 'Cấu hình tài khoản',group: '/cau_hinh',children: [],screen: Container()),
+    ],screen: Container()),
+    RouteModel(route: '/danh_sach_duong_pho', label: 'Danh sách đường phố',children: [],group: '/danh_sach_duong_pho',screen: Container()),
+
   //   RouteModel(route: '/qr_code', label: 'QR Code',children: [],group: '/qr_code',screen: const QrCodeScreen()),
 
   ];
@@ -75,9 +60,9 @@ class RouteConfig{
       listRouteToPage.addAll(_routeToPage.where((element) => element.name == model.route).toList());
       if(listRouteToPage.isNotEmpty){
         RouteToPage route = listRouteToPage.first;
-        if(route.roles.isEmpty || route.roles.contains(appController.role)){
+        // if(route.roles.isEmpty || route.roles.contains(appController.role)){
           list.add(model);
-        }
+        // }
       }
     }
     return list;

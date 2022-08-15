@@ -1,11 +1,10 @@
-import 'dart:io';
+
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:prefs/prefs.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:web_smart_water/api/api.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/controller/loading_controller.dart';
 import 'package:web_smart_water/controller/notification_controller.dart';
@@ -26,11 +25,11 @@ class AppController extends GetxController{
   String mainSlug = '';
   RxBool isSmall = false.obs;
   final Rx<RouteModel> currentRoute =RouteModel(
-      route: '/thong_ke_xuat_nhap',
-      label: 'Thống kê xuất nhập',
-      group: '/thong_ke',
+      route: '/danh_sach_duong_pho',
+      label: 'Danh sách đường phố',
+      group: '/danh_sach_duong_pho',
       children: [],
-      screen: HomeScreen())
+      screen: Container())
       .obs;
   List<String> listCustomer =[];
   List<String> listCodeBuy =[];
@@ -184,9 +183,9 @@ class AppController extends GetxController{
                   screen: routeToPage.page));
             } else {
               changeRoute(RouteModel(
-                  route: '/thong_ke_xuat_nhap',
-                  label: 'Thống kê xuất nhập',
-                  group: '/thong_ke',
+                  route: '/home',
+                  label: 'Home',
+                  group: '/home',
                   children: [],
                   screen: HomeScreen()));
             }
@@ -211,9 +210,9 @@ class AppController extends GetxController{
 
   void initRoute(){
     appController.currentRoute.value = RouteModel(
-        route: '/thong_ke_xuat_nhap',
+        route: '/danh_sach_duong_pho',
         label: 'Thống kê xuất nhập',
-        group: '/thong_ke',
+        group: '/danh_sach_duong_pho',
         children: [],
         screen: HomeScreen());
   }

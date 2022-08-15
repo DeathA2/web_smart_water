@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:web_smart_water/api/luong_api/user_api.dart';
 import 'package:web_smart_water/config/app_config.dart';
 import 'package:web_smart_water/controller/app_controller.dart';
 
@@ -35,6 +36,6 @@ class BaseApi {
 }
 
 class Api extends BaseApi
-    with {}
+    with ListUserApi{}
 
 final Api api = Api();

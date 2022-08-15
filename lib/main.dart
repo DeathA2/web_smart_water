@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    appController.loadingData(false);
+    // appController.loadingData(false);
     super.initState();
   }
   @override
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       title: AppConfig.APP_NAME,
-      initialRoute: '/',
+      initialRoute: '/home',
       getPages: RouteConfig().getRoute,
     );
   }
