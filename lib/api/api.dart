@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:web_smart_water/code_cua_hung/api/account_api.dart';
+import 'package:web_smart_water/code_cua_hung/api/login_api.dart';
 import 'package:web_smart_water/config/app_config.dart';
 import 'package:web_smart_water/controller/app_controller.dart';
 
@@ -35,6 +37,6 @@ class BaseApi {
 }
 
 class Api extends BaseApi
-    with {}
+    with LogInApi,AccountApi{}
 
 final Api api = Api();

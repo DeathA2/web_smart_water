@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/5),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/img/logo.png',
                   fit: BoxFit.fitWidth,
                 ),
               ),

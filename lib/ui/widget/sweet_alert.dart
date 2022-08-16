@@ -106,11 +106,11 @@ class _SweetAlertState extends State<SweetAlert> with TickerProviderStateMixin{
   String getIcon(){
     switch(widget.type){
       case SweetAlertType.success:
-        return 'assets/images/success.png';
+        return 'assets/img/success.png';
       case SweetAlertType.error:
-        return 'assets/images/error.png';
+        return 'assets/img/error.png';
       default:
-        return 'assets/images/warning.png';
+        return 'assets/img/warning.png';
     }
   }
 }

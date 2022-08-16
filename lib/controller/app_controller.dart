@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:prefs/prefs.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:web_smart_water/api/api.dart';
+import 'package:web_smart_water/code_cua_hung/config/account_view.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/controller/loading_controller.dart';
 import 'package:web_smart_water/controller/notification_controller.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 import 'package:web_smart_water/utils/session_storage_helper.dart';
+import '../code_cua_hung/config/config_account.dart';
 typedef void MenuCallback(ObjectKey);
 class AppController extends GetxController{
   final PushNotificationStream pushNotificationStream = PushNotificationStream();
@@ -26,11 +28,11 @@ class AppController extends GetxController{
   String mainSlug = '';
   RxBool isSmall = false.obs;
   final Rx<RouteModel> currentRoute =RouteModel(
-      route: '/thong_ke_xuat_nhap',
-      label: 'Thống kê xuất nhập',
+      route: '/list_account',
+      label: 'Cấu hình tài khoản',
       group: '/thong_ke',
       children: [],
-      screen: HomeScreen())
+      screen: ConfigAccountScreen())
       .obs;
   List<String> listCustomer =[];
   List<String> listCodeBuy =[];
@@ -211,11 +213,11 @@ class AppController extends GetxController{
 
   void initRoute(){
     appController.currentRoute.value = RouteModel(
-        route: '/thong_ke_xuat_nhap',
+        route: '/list_account',
         label: 'Thống kê xuất nhập',
-        group: '/thong_ke',
+        group: '/list_account',
         children: [],
-        screen: HomeScreen());
+        screen: ListAccountView());
   }
 }
 final AppController appController = Get.put(AppController());
