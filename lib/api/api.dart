@@ -38,7 +38,6 @@ class BaseApi {
 }
 
 class Api extends BaseApi
-    with LogInApi,AccountApi{}
-    with ListUserApi{}
+    with LogInApi,AccountApi,ListUserApi{}
 
 final Api api = Api();
