@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/list_customers/list_customers_screen.dart';
+import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets_screen.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/screen/main/splash.dart';
 
@@ -17,7 +19,8 @@ class RouteConfig{
     RouteToPage(name: '/cau_hinh', page: Container(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh_tai_khoan', page: Container(),roles: ['admin','operation','manager']),
-    RouteToPage(name: '/danh_sach_duong_pho', page: Container(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/danh_sach_duong_pho', page: ListStreetsScreen(),roles: []),
+    RouteToPage(name: '/danh_sach_khach_hang', page: ListCustomersScreen(),roles: []),
   ];
   final List<GetPage> _route = _routeToPage.map((route) => GetPage(name: route.name, page: () => route.page)).toList();
 
@@ -36,7 +39,8 @@ class RouteConfig{
       RouteModel(route: '/cau_hinh_danh_muc', label: 'Cấu hình danh mục',group: '/cau_hinh',children: [],screen: Container()),
       RouteModel(route: '/cau_hinh_tai_khoan', label: 'Cấu hình tài khoản',group: '/cau_hinh',children: [],screen: Container()),
     ],screen: Container()),
-    RouteModel(route: '/danh_sach_duong_pho', label: 'Danh sách đường phố',children: [],group: '/danh_sach_duong_pho',screen: Container()),
+    RouteModel(route: '/danh_sach_duong_pho', label: 'Danh sách đường phố',children: [],group: '/danh_sach_duong_pho',screen: ListStreetsScreen()),
+    RouteModel(route: '/danh_sach_khach_hang', label: 'Danh sách khách hàng',children: [],group: '/danh_sach_khach_hang',screen: ListCustomersScreen()),
 
   //   RouteModel(route: '/qr_code', label: 'QR Code',children: [],group: '/qr_code',screen: const QrCodeScreen()),
 

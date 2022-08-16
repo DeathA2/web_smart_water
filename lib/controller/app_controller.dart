@@ -8,6 +8,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/controller/loading_controller.dart';
 import 'package:web_smart_water/controller/notification_controller.dart';
+import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets_screen.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 import 'package:web_smart_water/utils/session_storage_helper.dart';
@@ -29,7 +30,7 @@ class AppController extends GetxController{
       label: 'Danh sách đường phố',
       group: '/danh_sach_duong_pho',
       children: [],
-      screen: Container())
+      screen: ListStreetsScreen())
       .obs;
   List<String> listCustomer =[];
   List<String> listCodeBuy =[];
@@ -130,7 +131,8 @@ class AppController extends GetxController{
   // }
 
   Future getLoginData() async{
-    token = SessionStorageHelper.getValue('token');
+    // token = SessionStorageHelper.getValue('token');
+    token = '1234567890';
     user = SessionStorageHelper.getValue('user');
     role = SessionStorageHelper.getValue('role');
   }
@@ -145,9 +147,9 @@ class AppController extends GetxController{
   Future resetLoginData() async{
     SessionStorageHelper.clearAll();
     var pref = await SharedPreferences.getInstance();
-    pref.setString('route','');
-    pref.setString('label','');
-    pref.setString('group','');
+    pref.setString('route','/danh_sach_duong_pho');
+    pref.setString('label','Danh sách đường phố');
+    pref.setString('group','/danh_sach_duong_pho');
     await getLoginData();
   }
 
@@ -183,11 +185,11 @@ class AppController extends GetxController{
                   screen: routeToPage.page));
             } else {
               changeRoute(RouteModel(
-                  route: '/home',
+                  route: '/danh_sach_duong_pho',
                   label: 'Home',
-                  group: '/home',
+                  group: '/danh_sach_duong_pho',
                   children: [],
-                  screen: HomeScreen()));
+                  screen: ListStreetsScreen()));
             }
           }
           isLoading.value = false;
@@ -197,14 +199,14 @@ class AppController extends GetxController{
         print('get token error');
         isLoading.value = false;
         Future.delayed(Duration.zero).then((value) =>
-            Get.offAllNamed('/login'));
+            Get.offAllNamed('/danh_sach_duong_pho'));
       }
     }catch(e){
       print('error');
       isLoading.value = false;
       await resetLoginData();
       Future.delayed(Duration.zero).then((value) =>
-          Get.offAllNamed('/login'));
+          Get.offAllNamed('/danh_sach_duong_pho'));
     }
   }
 
@@ -214,7 +216,7 @@ class AppController extends GetxController{
         label: 'Thống kê xuất nhập',
         group: '/danh_sach_duong_pho',
         children: [],
-        screen: HomeScreen());
+        screen: ListStreetsScreen());
   }
 }
 final AppController appController = Get.put(AppController());
