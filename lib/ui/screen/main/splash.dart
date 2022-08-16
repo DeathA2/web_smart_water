@@ -28,7 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
         children: <Widget>[
           Expanded(
             child: Center(
-              child: Container(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/5),
+                child: Image.asset(
+                  'assets/img/logo.png',
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
           ),

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:prefs/prefs.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:web_smart_water/api/api.dart';
+import 'package:web_smart_water/code_cua_hung/config/account_view.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/controller/loading_controller.dart';
 import 'package:web_smart_water/controller/notification_controller.dart';
@@ -12,6 +14,7 @@ import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 import 'package:web_smart_water/utils/session_storage_helper.dart';
+import '../code_cua_hung/config/config_account.dart';
 typedef void MenuCallback(ObjectKey);
 class AppController extends GetxController{
   final PushNotificationStream pushNotificationStream = PushNotificationStream();
@@ -131,8 +134,7 @@ class AppController extends GetxController{
   // }
 
   Future getLoginData() async{
-    // token = SessionStorageHelper.getValue('token');
-    token = '1234567890';
+    token = SessionStorageHelper.getValue('token');
     user = SessionStorageHelper.getValue('user');
     role = SessionStorageHelper.getValue('role');
   }
@@ -147,9 +149,9 @@ class AppController extends GetxController{
   Future resetLoginData() async{
     SessionStorageHelper.clearAll();
     var pref = await SharedPreferences.getInstance();
-    pref.setString('route','/danh_sach_duong_pho');
-    pref.setString('label','Danh sách đường phố');
-    pref.setString('group','/danh_sach_duong_pho');
+    pref.setString('route','');
+    pref.setString('label','');
+    pref.setString('group','');
     await getLoginData();
   }
 

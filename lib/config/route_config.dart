@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/list_customers/list_customers_screen.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets_screen.dart';
+import 'package:web_smart_water/code_cua_hung/login_page/login.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/screen/main/splash.dart';
-
+import '../code_cua_hung/config/account_view.dart';
+import '../code_cua_hung/config/config_account.dart';
 import '../controller/app_controller.dart';
 import '../ui/screen/main/permission_denied.dart';
 class RouteConfig{
   static final List<RouteToPage> _routeToPage = [
     RouteToPage(name: '/', page: const SplashScreen(),roles: []),
-    RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
-    // RouteToPage(name: '/login', page: ResponsiveLoginPage(
-    //     desktopBody: const LogInPage(),
-    //     mobileBody: const LogInMobilePage()), roles: []
-    // ),
+    // RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
+    RouteToPage(name: '/login', page: const LogInPage(), roles: []
+    ),
     RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh', page: Container(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
@@ -52,7 +52,7 @@ class RouteConfig{
     GetPage(name : '/', page: () => const SplashScreen()),
     GetPage(name : '/home', page: () => HomeScreen()),
     GetPage(name : '/permission_denied', page: () => const PermissionDeniedScreen()),
-    // GetPage(name : '/login', page: () => ResponsiveLoginPage(
+    GetPage(name : '/login', page: () => LogInPage())
     //     desktopBody: const LogInPage(),
     //     mobileBody: const LogInMobilePage())),
   ];

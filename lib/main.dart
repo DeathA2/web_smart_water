@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       title: AppConfig.APP_NAME,
-      initialRoute: '/danh_sach_duong_pho',
+      initialRoute: '/login',
       getPages: RouteConfig().getRoute,
     );
   }
