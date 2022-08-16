@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:web_smart_water/config/route_config.dart';
 import 'package:web_smart_water/config/theme_config.dart';
-import 'dart:html';
-
 import 'package:web_smart_water/controller/app_controller.dart';
 class NavbarItem extends StatefulWidget{
   const NavbarItem({Key? key,required this.callback,required this.scaffoldKey}) : super(key: key);
@@ -74,7 +72,7 @@ class _NavbarItemState extends State<NavbarItem> {
   }
 
   Widget _buildListRightButton(){
-    final RouteModel route = RouteModel(route: '/admin', label: appController.user,group: '/admin',children: [
+    final RouteModel route = RouteModel(route: '/admin', label: 'admin',group: '/admin',children: [
         RouteModel(route: '/logout', label: 'Đăng xuất',group: '/admin',children: [],screen: Container())
     ],screen: Container());
     return GestureDetector(
