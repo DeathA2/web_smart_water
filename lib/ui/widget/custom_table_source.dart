@@ -8,6 +8,7 @@ import 'package:web_smart_water/controller/app_controller.dart';
 import 'package:web_smart_water/model/template/template_model.dart';
 import 'package:web_smart_water/ui/item/template_web/create_view.dart';
 import 'package:web_smart_water/ui/item/template_web/fields/field.dart';
+import 'package:web_smart_water/ui/item/template_web/luong_add/detail_view.dart';
 import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 import 'package:web_smart_water/utils/utils.dart';
 class CustomDataSource extends DataGridSource {
@@ -276,6 +277,28 @@ class CustomDataSource extends DataGridSource {
           );
         },
       );
+    }else if(action == 'detail'){
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              scrollable: true,
+              content: MyDetailView(model:model,isNew: false,),
+            );
+          }).then((value){
+        if(value == null){
+          model.initValue();
+        }else{
+          if(!value){
+            model.initValue();
+          }else{
+            listModel.refresh();
+            updateDataGriDataSource();
+            callback(true);
+          }
+        }
+      });
     }
   }
 

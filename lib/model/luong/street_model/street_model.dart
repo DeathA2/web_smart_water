@@ -6,7 +6,7 @@ import 'package:web_smart_water/ui/screen/luong_smart_water/data.dart';
 import '../../template/template_model.dart';
 import 'customers_view.dart';
 
-class UserModel extends TemplateModel with StreetsView {
+class UserModel extends TemplateModel {
   late String user;
   List<StreetsModel>? streets;
 
@@ -101,6 +101,12 @@ class StreetsModel extends TemplateModel with StreetsView {
     }
     return data;
   }
+
+  @override
+  StreetsModel getEmptyModel() {
+    return StreetsModel();
+  }
+
 
   @override
   String getModelName() {
@@ -228,12 +234,19 @@ class CustomersModel extends TemplateModel with CustomerView {
   }
 
   @override
-  TemplateModel getEmptyModel() {
+  CustomersModel getEmptyModel() {
     return CustomersModel();
   }
 
   @override
   Future<bool> create() async {
+    data.remove('beforevalue');
+    data.remove('baforetime');
+    return await api.createEditDataCustomer(data);
+  }
+
+  @override
+  Future<bool> update() async {
     data.remove('beforevalue');
     data.remove('baforetime');
     return await api.createEditDataCustomer(data);

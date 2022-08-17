@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/list_customers/list_customers_screen.dart';
+import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/list_customers_screen.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets_screen.dart';
 import 'package:web_smart_water/code_cua_hung/login_page/login.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';

@@ -55,7 +55,10 @@ mixin ListUserApi on BaseApi{
   Future<bool> createEditStreet(data) async {
     const url = '/api/Admin/createEditStreet';
     try {
-      Response response = await dio.post(url, data: data, options: Options(
+      Response response = await dio.post(url, data: {
+        'codeStreet': data['code'].toString(),
+        'nameStreet': data['name'].toString(),
+      }, options: Options(
         headers: {'Content-Type': 'application/json', 'accept': '*/*'},
       ));
       return true;
@@ -66,7 +69,7 @@ mixin ListUserApi on BaseApi{
   }
 
   Future<bool> deleteDataStreet(String code) async{
-    const url = '/api/Admin/deleteCustomer';
+    const url = '/api/Admin/deleteStreet';
     try {
       Response response = await dio.delete(url,queryParameters: {'code': code}, options: Options(
         headers: {'Content-Type': 'application/json', 'accept': '*/*'},
