@@ -211,7 +211,8 @@ class _MyDaTaListState extends State<MyDaTaList> {
         )
     ):GridColumn(
         columnName: field['field'],
-        minimumWidth: 150,
+        minimumWidth: 0,
+        width: 100,
         label: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(12.0),
