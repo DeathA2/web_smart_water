@@ -6,6 +6,7 @@ import 'package:web_smart_water/ui/screen/luong_smart_water/list_streets/streets
 import 'package:web_smart_water/code_cua_hung/login_page/login.dart';
 import 'package:web_smart_water/ui/screen/main/home.dart';
 import 'package:web_smart_water/ui/screen/main/splash.dart';
+import '../code_cua_hung/admin_history/admin_history_view.dart';
 import '../code_cua_hung/config/account_view.dart';
 import '../code_cua_hung/config/config_account.dart';
 import '../controller/app_controller.dart';
@@ -23,6 +24,7 @@ class RouteConfig{
     RouteToPage(name: '/danh_sach_duong_pho', page: ListStreetsScreen(),roles: []),
     RouteToPage(name: '/danh_sach_khach_hang', page: ListCustomersScreen(),roles: []),
     RouteToPage(name: '/type', page: TypeScreen(),roles: []),
+    RouteToPage(name: '/admin_history', page: AdminHistoryView(),roles: ['admin']),
   ];
   final List<GetPage> _route = _routeToPage.map((route) => GetPage(name: route.name, page: () => route.page)).toList();
 
@@ -43,6 +45,7 @@ class RouteConfig{
     ],screen: ConfigAccountScreen()),
     RouteModel(route: '/danh_sach_duong_pho', label: 'Danh sách đường phố',children: [],group: '/danh_sach_duong_pho',screen: ListStreetsScreen()),
     RouteModel(route: '/danh_sach_khach_hang', label: 'Danh sách khách hàng',children: [],group: '/danh_sach_khach_hang',screen: ListCustomersScreen()),
+    RouteModel(route: '/admin_history', label: 'Lịch sử',group: '/lich_su',children: [],screen: AdminHistoryView()),
 
   //   RouteModel(route: '/qr_code', label: 'QR Code',children: [],group: '/qr_code',screen: const QrCodeScreen()),
 

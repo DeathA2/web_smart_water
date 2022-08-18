@@ -9,7 +9,7 @@ mixin AccountApi on BaseApi{
     const url = '/api/User/getListUser';
     try {
       Response response = await dio.get(url, options: Options(
-        headers: {'Content-Type': 'text/plain', 'accept': '*/*', 'token':'1234567890'},
+        headers: {'Content-Type': 'text/plain', 'accept': '*/*', 'token':appController.token},
       ));
       if (response.statusCode == 200) {
         return jsonDecode(response.data) as List<dynamic>;
