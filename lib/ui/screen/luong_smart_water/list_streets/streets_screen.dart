@@ -5,11 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:web_smart_water/api/api.dart';
 import 'package:web_smart_water/config/theme_config.dart';
+import 'package:web_smart_water/controller/app_controller.dart';
 import 'package:web_smart_water/model/luong/street_model/street_model.dart';
+import 'package:web_smart_water/model/template/template_model.dart';
 import 'package:web_smart_water/ui/item/template_web/list_view/list_view.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/data.dart';
 import 'package:web_smart_water/ui/widget/custom_scaffold.dart';
 import 'package:web_smart_water/ui/widget/loading_screen.dart';
+import 'package:web_smart_water/ui/widget/sweet_alert.dart';
 
 class ListStreetsScreen extends StatefulWidget {
   const ListStreetsScreen({Key? key}) : super(key: key);
@@ -20,6 +23,13 @@ class ListStreetsScreen extends StatefulWidget {
 
 class _ListStreetsScreenState extends State<ListStreetsScreen> {
   double widthGet = 0;
+  RxList<TemplateModel> listModel = <TemplateModel>[].obs;
+  RxList<TemplateModel> listAllModel = <TemplateModel>[].obs;
+
+  // void updateDataGriDataSource() {
+  //   super.notifyListeners();
+  //   buildPaginatedDataGridRows();
+  // }
   final TextStyle titleStyle = TextStyle(
       fontSize: ThemeConfig.smallSize,
       color: ThemeConfig.blackColor.withOpacity(0.7),
@@ -117,218 +127,323 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
   }
 
   Widget _buildGridView(street) {
-    var sts = street[0]['streets'][0]['code'];
     return Wrap(
       spacing: 20,
       runSpacing: 20,
       children: [
-        Container(
-          width: widthGet * 0.25,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.black12)),
-          child: ClipRRect(
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  decoration:
-                      BoxDecoration(color: Colors.grey.withOpacity(0.2)),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.map_rounded),
-                      _buildSpaceRow(),
-                      Text(
-                        User.streets.keys.elementAt(0),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      )
-                    ],
-                  ),
-                ),
-                const Divider(height: 1, color: Colors.black12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Tên: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            "${street[0]['streets'][0]['name']}",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Mô tả: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            "null",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Người ghi số: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            User.streets[User.streets.keys.elementAt(0)]?.join(", ") ?? "",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.indeterminate_check_box_sharp)),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.delete, color: Colors.red,),
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        for (int i = 0; i < User.streets.length; i++) _buildButton(street, i)
 
-
-
-
-
-
-        Container(
-          width: widthGet * 0.25,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.black12)),
-          child: ClipRRect(
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  decoration:
-                  BoxDecoration(color: Colors.grey.withOpacity(0.2)),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.map_rounded),
-                      _buildSpaceRow(),
-                      Text(
-                        User.streets.keys.elementAt(1),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      )
-                    ],
-                  ),
-                ),
-                const Divider(height: 1, color: Colors.black12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Tên: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            "${street[0]['streets'][1]['name']}",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Mô tả: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            "null",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        children: [
-                          Text(
-                            "Người ghi số: ",
-                            style: titleStyle,
-                          ),
-                          _buildSpaceRow(),
-                          Text(
-                            User.streets[User.streets.keys.elementAt(1)]?.join(", ") ?? "",
-                            style: contentStyle,
-                          )
-                        ],
-                      ),
-                      _buildSpace(),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          MaterialButton(
-                              onPressed: () {},
-                              shape: Border.all(),
-                              // iconSize: 20,
-                              child: const Icon(Icons.skip_next)
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          MaterialButton(
-                              onPressed: () {},
-                              shape: Border.all(),
-                              // iconSize: 20,
-                              child: const Icon(Icons.delete, color: Colors.red,)),
-                        ],
-                      ),
-                      _buildSpace(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
+        // Container(
+        //   width: widthGet * 0.25,
+        //   decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(5),
+        //       border: Border.all(color: Colors.black12)),
+        //   child: ClipRRect(
+        //     child: Column(
+        //       children: [
+        //         Container(
+        //           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        //           decoration:
+        //           BoxDecoration(color: Colors.grey.withOpacity(0.2)),
+        //           child: Row(
+        //             children: [
+        //               const Icon(Icons.map_rounded),
+        //               _buildSpaceRow(),
+        //               Text(
+        //                 User.streets.keys.elementAt(1),
+        //                 style: const TextStyle(
+        //                     fontWeight: FontWeight.bold, fontSize: 18),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //         const Divider(height: 1, color: Colors.black12),
+        //         Padding(
+        //           padding: const EdgeInsets.symmetric(horizontal: 20),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //             children: [
+        //               _buildSpace(),
+        //               Row(
+        //                 children: [
+        //                   Text(
+        //                     "Tên: ",
+        //                     style: titleStyle,
+        //                   ),
+        //                   _buildSpaceRow(),
+        //                   Text(
+        //                     "${street[0]['streets'][1]['name']}",
+        //                     style: contentStyle,
+        //                   )
+        //                 ],
+        //               ),
+        //               _buildSpace(),
+        //               Row(
+        //                 children: [
+        //                   Text(
+        //                     "Mô tả: ",
+        //                     style: titleStyle,
+        //                   ),
+        //                   _buildSpaceRow(),
+        //                   Text(
+        //                     "null",
+        //                     style: contentStyle,
+        //                   )
+        //                 ],
+        //               ),
+        //               _buildSpace(),
+        //               Row(
+        //                 children: [
+        //                   Text(
+        //                     "Người ghi số: ",
+        //                     style: titleStyle,
+        //                   ),
+        //                   _buildSpaceRow(),
+        //                   Text(
+        //                     User.streets[User.streets.keys.elementAt(1)]?.join(", ") ?? "",
+        //                     style: contentStyle,
+        //                   )
+        //                 ],
+        //               ),
+        //               _buildSpace(),
+        //               Row(
+        //                 mainAxisSize: MainAxisSize.max,
+        //                 mainAxisAlignment: MainAxisAlignment.end,
+        //                 children: [
+        //                   MaterialButton(
+        //                       onPressed: () {},
+        //                       shape: Border.all(),
+        //                       // iconSize: 20,
+        //                       child: const Icon(Icons.skip_next)
+        //                   ),
+        //                   const SizedBox(
+        //                     width: 10,
+        //                   ),
+        //                   MaterialButton(
+        //                       onPressed: () async {
+        //                         var model = await api.deleteDataStreet(User.streets.keys.elementAt(1));
+        //                         showDialog(
+        //                           context: context,
+        //                           builder: (context) {
+        //                             return CupertinoAlertDialog(
+        //                               title: Text('Delete ${street[0]['streets'][1]['name']}'),
+        //                               content: Text('Do you want to delete ${street[0]['streets'][1]['name']}'),
+        //                               actions: [
+        //                                 CupertinoDialogAction(
+        //                                     onPressed:() {
+        //                                       Navigator.of(context).pop();
+        //
+        //                                         if(model){
+        //                                           listModel.remove(model);
+        //                                           listAllModel.remove(model);
+        //                                           // updateDataGriDataSource();
+        //                                           appController.message = SweetAlert(
+        //                                             type: SweetAlertType.success,
+        //                                             message: 'Xóa ${street[0]['streets'][1]['name']} thành công',
+        //                                             title: 'Thành công',
+        //                                           );
+        //                                           appController.pushNotificationStream.rebuildWidget(true);
+        //                                           // callback(true);
+        //                                         }else{
+        //                                           appController.message = SweetAlert(
+        //                                             type: SweetAlertType.error,
+        //                                             message: 'Xóa ${street[0]['streets'][1]['name']} không thành công',
+        //                                             title: 'Lỗi',
+        //                                           );
+        //                                           appController.pushNotificationStream.rebuildWidget(true);
+        //                                         }
+        //
+        //                                     },
+        //                                     child: const Text('Delete')
+        //                                 ),
+        //                                 CupertinoDialogAction(
+        //                                     onPressed:(){
+        //                                       Navigator.of(context).pop();
+        //                                     },
+        //                                     child: const Text('Cancel')
+        //                                 )
+        //                               ],
+        //                             );
+        //                           },
+        //                         );
+        //                       },
+        //                       shape: Border.all(),
+        //                       // iconSize: 20,
+        //                       child: const Icon(Icons.delete, color: Colors.red,)),
+        //                 ],
+        //               ),
+        //               _buildSpace(),
+        //             ],
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // )
       ],
+    );
+  }
+  //
+  // @override
+  // Future<bool> delete() async {
+  //   return await api.deleteDataStreet();
+  // }
+
+  Widget _buildButton(street, index) {
+    return Container(
+      width: widthGet * 0.25,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: Colors.black12)),
+      child: ClipRRect(
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2)),
+              child: Row(
+                children: [
+                  const Icon(Icons.map_rounded),
+                  _buildSpaceRow(),
+                  Text(
+                    User.streets.keys.elementAt(index),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  )
+                ],
+              ),
+            ),
+            const Divider(height: 1, color: Colors.black12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildSpace(),
+                  Row(
+                    children: [
+                      Text(
+                        "Tên: ",
+                        style: titleStyle,
+                      ),
+                      _buildSpaceRow(),
+                      Text(
+                        "${street[0]['streets'][index]['name']}",
+                        style: contentStyle,
+                      )
+                    ],
+                  ),
+                  _buildSpace(),
+                  Row(
+                    children: [
+                      Text(
+                        "Mô tả: ",
+                        style: titleStyle,
+                      ),
+                      _buildSpaceRow(),
+                      Text(
+                        "null",
+                        style: contentStyle,
+                      )
+                    ],
+                  ),
+                  _buildSpace(),
+                  Row(
+                    children: [
+                      Text(
+                        "Người ghi số: ",
+                        style: titleStyle,
+                      ),
+                      _buildSpaceRow(),
+                      Text(
+                        User.streets[User.streets.keys.elementAt(index)]
+                                ?.join(", ") ??
+                            "",
+                        style: contentStyle,
+                      )
+                    ],
+                  ),
+                  _buildSpace(),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MaterialButton(
+                          onPressed: () {},
+                          shape: Border.all(),
+                          // iconSize: 20,
+                          child: const Icon(Icons.skip_next)),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      MaterialButton(
+                          onPressed: () async {
+                            var model = await api.deleteDataStreet(
+                                User.streets.keys.elementAt(index));
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return CupertinoAlertDialog(
+                                  title: Text(
+                                      'Delete ${street[0]['streets'][index]['name']}'),
+                                  content: Text(
+                                      'Do you want to delete ${street[0]['streets'][index]['name']}'),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          if (model) {
+                                            listModel.remove(model);
+                                            listAllModel.remove(model);
+                                            // updateDataGriDataSource();
+                                            appController.message = SweetAlert(
+                                              type: SweetAlertType.success,
+                                              message:
+                                                  'Xóa ${street[0]['streets'][index]['name']} thành công',
+                                              title: 'Thành công',
+                                            );
+                                            appController.pushNotificationStream
+                                                .rebuildWidget(true);
+                                            // callback(true);
+                                          } else {
+                                            appController.message = SweetAlert(
+                                              type: SweetAlertType.error,
+                                              message:
+                                                  'Xóa ${street[0]['streets'][index]['name']} không thành công',
+                                              title: 'Lỗi',
+                                            );
+                                            appController.pushNotificationStream
+                                                .rebuildWidget(true);
+                                          }
+                                        },
+                                        child: const Text('Delete')),
+                                    CupertinoDialogAction(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Cancel'))
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          shape: Border.all(),
+                          // iconSize: 20,
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          )),
+                    ],
+                  ),
+                  _buildSpace(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
