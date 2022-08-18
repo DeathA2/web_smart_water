@@ -6,6 +6,8 @@ import 'package:web_smart_water/code_cua_hung/api/login_api.dart';
 import 'package:web_smart_water/config/app_config.dart';
 import 'package:web_smart_water/controller/app_controller.dart';
 
+import '../code_cua_hung/api/type_api.dart';
+
 class BaseApi {
   Dio dio = Dio(BaseOptions(
     baseUrl: AppConfig.BASE_URL,
@@ -38,6 +40,6 @@ class BaseApi {
 }
 
 class Api extends BaseApi
-    with LogInApi,AccountApi,ListUserApi{}
+    with LogInApi,AccountApi,ListUserApi,TypeApi{}
 
 final Api api = Api();

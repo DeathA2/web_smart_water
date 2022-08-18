@@ -1,0 +1,79 @@
+
+import 'package:flutter/material.dart';
+mixin TypeView {
+  Map<String, dynamic> getView() {
+    return {
+      'edit_view':{
+        'fields':[
+          {
+            'field':'code',
+            'label':'Mã',
+            'type':'text_field',
+            'span':12,
+            'required':true,
+            'readOnly':true
+          },
+          {
+            'field':'name',
+            'label':'Tên',
+            'type':'text_field',
+            'span':12,
+            'readOnly':true
+          },
+          {
+            'field':'des',
+            'label':'Mô tả',
+            'type':'text_field',
+            'span':12,
+          },
+        ],
+      },
+      'list_view':{
+        'fields':[
+          {
+            'field':'code',
+            'label':'Mã',
+            'type':'text_field',
+          },
+          {
+            'field':'name',
+            'label':'Tên',
+            'type':'text_field',
+          },
+          {
+            'field':'des',
+            'label':'Mô tả',
+            'type':'text_field',
+          },
+          {
+            'field':'action_button',
+            'label':'Action',
+            'type':'multiple_button',
+            'action':[
+              {
+                'type':'edit',
+                'label':'Edit',
+                'icon':Icons.edit
+              },
+              {
+                'type':'delete',
+                'label':'Delete',
+                'icon':Icons.delete
+              },
+            ]
+          },
+        ],
+        'buttons':[
+          {
+            'type':'create',
+            'label':'Create',
+            'icon':Icons.add
+          }
+        ],
+        'show_search':false,
+        'field_filter':[
+        ]
+      }
+    };
+  }
+}
