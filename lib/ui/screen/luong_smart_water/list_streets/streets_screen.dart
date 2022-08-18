@@ -8,6 +8,7 @@ import 'package:web_smart_water/config/theme_config.dart';
 import 'package:web_smart_water/controller/app_controller.dart';
 import 'package:web_smart_water/model/luong/street_model/street_model.dart';
 import 'package:web_smart_water/model/template/template_model.dart';
+import 'package:web_smart_water/ui/item/template_web/create_view.dart';
 import 'package:web_smart_water/ui/item/template_web/list_view/list_view.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/data.dart';
 import 'package:web_smart_water/ui/widget/custom_scaffold.dart';
@@ -25,11 +26,9 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
   double widthGet = 0;
   RxList<TemplateModel> listModel = <TemplateModel>[].obs;
   RxList<TemplateModel> listAllModel = <TemplateModel>[].obs;
+  late final RxList<TemplateModel> listDataModel;
+  late final MenuCallback callback;
 
-  // void updateDataGriDataSource() {
-  //   super.notifyListeners();
-  //   buildPaginatedDataGridRows();
-  // }
   final TextStyle titleStyle = TextStyle(
       fontSize: ThemeConfig.smallSize,
       color: ThemeConfig.blackColor.withOpacity(0.7),
@@ -54,11 +53,27 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
             '$code': ['$name']
           });
         }
-
         streets.add(sts);
       }
     }
     return data;
+  }
+
+  Future<List<CustomersEachStreetModel>> getCustomersEachStreet(code) async {
+    // User = {};
+    List<dynamic> data = await api.getListCustomerForEachAdmin();
+    List<dynamic> customers = [];
+    for (var user in data) {
+      for (var street in user['streets']) {
+        if (street['code'] == code){
+          for (var customer in street['customers'])
+            {
+              customers.add(customer);
+            }
+        }
+      }
+    }
+    return customers.map((e) => CustomersEachStreetModel.fromJson(e)).toList();
   }
 
   @override
@@ -84,13 +99,13 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
   //     },
   //   );
   // }
-
+  bool showList = false;
   int _index = 0;
   String title = 'Danh sách đường phố';
   int typeReport = 1;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return (showList) ? _buildListCustomers() : FutureBuilder(
       future: getData(),
       builder: ((context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
@@ -284,13 +299,23 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
       ],
     );
   }
-  //
-  // @override
-  // Future<bool> delete() async {
-  //   return await api.deleteDataStreet();
-  // }
 
   Widget _buildButton(street, index) {
+    var user = 0;
+    var indexStreet = 0;
+    // bool _hasData = false;
+    String code = User.streets.keys.elementAt(index);
+    while (true) {
+      var currentStreet = street[user]['streets'] as List;
+      // var currentStreet = sts as List;
+      indexStreet =
+          currentStreet.indexWhere((element) => element['code'] == code);
+      if (indexStreet != -1) {
+        break;
+      }
+      user++;
+    }
+    String name = street[user]['streets'][indexStreet]['name'];
     return Container(
       width: widthGet * 0.25,
       decoration: BoxDecoration(
@@ -307,7 +332,7 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                   const Icon(Icons.map_rounded),
                   _buildSpaceRow(),
                   Text(
-                    User.streets.keys.elementAt(index),
+                    code,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 18),
                   )
@@ -330,7 +355,7 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                       ),
                       _buildSpaceRow(),
                       Text(
-                        "${street[0]['streets'][index]['name']}",
+                        name,
                         style: contentStyle,
                       )
                     ],
@@ -358,9 +383,7 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                       ),
                       _buildSpaceRow(),
                       Text(
-                        User.streets[User.streets.keys.elementAt(index)]
-                                ?.join(", ") ??
-                            "",
+                        User.streets[code]?.join(", ") ?? "",
                         style: contentStyle,
                       )
                     ],
@@ -371,25 +394,33 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       MaterialButton(
-                          onPressed: () {},
+                          minWidth: 0,
+                          padding: EdgeInsets.all(15),
+                          onPressed: () {
+                            showList = true;
+                            Street.code = code;
+                            Street.user = User.streets[code]?.join(", ") ?? "";
+                            Street.name = name;
+                            setState(() {
+                            });
+                          },
                           shape: Border.all(),
                           // iconSize: 20,
                           child: const Icon(Icons.skip_next)),
                       const SizedBox(
-                        width: 10,
+                        width: 20,
                       ),
                       MaterialButton(
+                          minWidth: 0,
+                          padding: EdgeInsets.all(15),
                           onPressed: () async {
-                            var model = await api.deleteDataStreet(
-                                User.streets.keys.elementAt(index));
+                            var model = await api.deleteDataStreet(code);
                             showDialog(
                               context: context,
                               builder: (context) {
                                 return CupertinoAlertDialog(
-                                  title: Text(
-                                      'Delete ${street[0]['streets'][index]['name']}'),
-                                  content: Text(
-                                      'Do you want to delete ${street[0]['streets'][index]['name']}'),
+                                  title: Text('Delete $name'),
+                                  content: Text('Do you want to delete $name'),
                                   actions: [
                                     CupertinoDialogAction(
                                         onPressed: () {
@@ -398,10 +429,10 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                                             listModel.remove(model);
                                             listAllModel.remove(model);
                                             // updateDataGriDataSource();
+                                            // notifyListeners();
                                             appController.message = SweetAlert(
                                               type: SweetAlertType.success,
-                                              message:
-                                                  'Xóa ${street[0]['streets'][index]['name']} thành công',
+                                              message: 'Xóa $name thành công',
                                               title: 'Thành công',
                                             );
                                             appController.pushNotificationStream
@@ -411,7 +442,7 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
                                             appController.message = SweetAlert(
                                               type: SweetAlertType.error,
                                               message:
-                                                  'Xóa ${street[0]['streets'][index]['name']} không thành công',
+                                                  'Xóa $name không thành công',
                                               title: 'Lỗi',
                                             );
                                             appController.pushNotificationStream
@@ -447,12 +478,53 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
     );
   }
 
+  _buildActionCreate(context) {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            scrollable: true,
+            content: MyCreateView(
+              model: StreetsModel().getEmptyModel(),
+              isNew: true,
+            ),
+          );
+        }).then((value) {
+      if (value != null) {
+        listDataModel.add(value);
+        callback(true);
+      }
+    });
+  }
+
   Widget _buildTitle() {
     if (_index == 0) {
-      return Text(
-        'Danh sách đường phố',
-        style: TextStyle(
-            fontSize: ThemeConfig.headerSize, fontWeight: FontWeight.bold),
+      return Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black26),
+            color: Colors.grey.withOpacity(0.5)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Danh sách đường phố',
+              style: TextStyle(
+                  fontSize: ThemeConfig.headerSize,
+                  fontWeight: FontWeight.bold),
+            ),
+            MaterialButton(
+              onPressed: () {
+                _buildActionCreate(context);
+              },
+              child: Icon(Icons.add),
+              shape: Border.all(),
+              minWidth: 0,
+              padding: EdgeInsets.all(15),
+            )
+          ],
+        ),
       );
     } else {
       switch (typeReport) {
@@ -511,5 +583,87 @@ class _ListStreetsScreenState extends State<ListStreetsScreen> {
         ],
       );
     }
+  }
+
+  Widget _buildListCustomers(){
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildSpace(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 5,child: _buildSmallInfor()),
+              _buildSpaceRow(),
+              Expanded(flex: 15,child: _buildListCus()),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSmallInfor(){
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all()
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(15),
+            width: Get.width,
+            color: Colors.grey.withOpacity(0.25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.location_on),
+                _buildSpaceRow(),
+                Text(Street.code, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              ],
+            ),
+          ),
+          Divider(height: 1,),
+          Container(
+            padding: EdgeInsets.all(30),
+            width: Get.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Tên khu vực", style: titleStyle,),
+                Center(child: Text(Street.name, style: contentStyle,)),
+                Text("Mô tả", style: titleStyle,),
+                Center(child: Text(Street.des, style: contentStyle,)),
+                Text("Nhân viên ghi nhận", style: titleStyle,),
+                Center(child: Text(Street.user, style: contentStyle,))
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListCus(){
+    return Column(
+      children: [
+        SingleChildScrollView(
+          controller: ScrollController(),
+          child: FutureBuilder(
+            future: getCustomersEachStreet(Street.code),
+            builder: ((context, AsyncSnapshot<List<CustomersEachStreetModel>> snapshot) {
+              if (snapshot.connectionState != ConnectionState.done){
+                return const LoadingScreen();
+              }
+              return MyListView(
+                  listDataModel: snapshot.data!.obs,
+                  template: CustomersEachStreetModel().getListViewTemplate(),
+                  typeModel: CustomersEachStreetModel());
+            }),
+          ),
+        ),
+      ],
+    );
   }
 }

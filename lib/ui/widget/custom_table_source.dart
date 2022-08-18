@@ -44,8 +44,19 @@ class CustomDataSource extends DataGridSource {
   RxList<TemplateModel> listAllModel = <TemplateModel>[].obs;
   @override
   List<DataGridRow> get rows => _dataGridRow;
+
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
+
+    Color getBackgroundColor() {
+      int index = _dataGridRow.indexOf(row as CustomDataGridRow) + 1;
+      if (index % 2 == 0) {
+        return Colors.black.withOpacity(0.1)!;
+      } else {
+        return Colors.white70!;
+      }
+    }
+
     List<Widget> listWidget = row.getCells().map<Widget>((dataGridCell) {
       Color getColor() {
         if (search.isNotEmpty &&dataGridCell.value.toString().toLowerCase().contains(search.toLowerCase())) {
@@ -73,6 +84,7 @@ class CustomDataSource extends DataGridSource {
     }).toList();
     // TODO: implement buildRow
     return DataGridRowAdapter(
+      color: getBackgroundColor(),
         cells: listWidget);
   }
 

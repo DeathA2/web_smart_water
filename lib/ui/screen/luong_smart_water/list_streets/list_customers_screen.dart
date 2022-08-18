@@ -48,10 +48,13 @@ class _ListCustomersScreenState extends State<ListCustomersScreen> {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: LoadingScreen());
           }
-          return MyListView(
-              listDataModel: snapshot.data!.obs,
-              template: CustomersModel().getListViewTemplate(),
-              typeModel: CustomersModel());
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: MyListView(
+                listDataModel: snapshot.data!.obs,
+                template: CustomersModel().getListViewTemplate(),
+                typeModel: CustomersModel()),
+          );
         },
       ),
     );
