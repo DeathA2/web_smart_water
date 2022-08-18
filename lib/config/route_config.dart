@@ -18,7 +18,7 @@ class RouteConfig{
     RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh', page: Container(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
-    RouteToPage(name: '/cau_hinh_tai_khoan', page: Container(),roles: ['admin','operation','manager']),
+    RouteToPage(name: '/cau_hinh_tai_khoan', page: ConfigAccountScreen(),roles: ['admin']),
     RouteToPage(name: '/danh_sach_duong_pho', page: ListStreetsScreen(),roles: []),
     RouteToPage(name: '/danh_sach_khach_hang', page: ListCustomersScreen(),roles: []),
   ];
@@ -35,10 +35,7 @@ class RouteConfig{
   //     RouteModel(route: '/bao_cao_thong_tin_kho', label: 'Báo cáo tồn kho',group: '/bao_cao',children: [],screen: const ReportWareHouseScreen()),
   //     RouteModel(route: '/bao_cao_thong_tin_don_hang', label: 'Báo cáo thông tin đơn hàng',group: '/bao_cao',children: [],screen: const ReportOrderScreen()),
   //   ]),
-    RouteModel(route: '/cau_hinh', label: 'Cấu hình',group: '/cau_hinh',children: [
-      RouteModel(route: '/cau_hinh_danh_muc', label: 'Cấu hình danh mục',group: '/cau_hinh',children: [],screen: Container()),
-      RouteModel(route: '/cau_hinh_tai_khoan', label: 'Cấu hình tài khoản',group: '/cau_hinh',children: [],screen: Container()),
-    ],screen: Container()),
+    RouteModel(route: '/cau_hinh_tai_khoan', label: 'Cấu hình tài khoản',group: '/cau_hinh',children: [],screen: ConfigAccountScreen()),
     RouteModel(route: '/danh_sach_duong_pho', label: 'Danh sách đường phố',children: [],group: '/danh_sach_duong_pho',screen: ListStreetsScreen()),
     RouteModel(route: '/danh_sach_khach_hang', label: 'Danh sách khách hàng',children: [],group: '/danh_sach_khach_hang',screen: ListCustomersScreen()),
 

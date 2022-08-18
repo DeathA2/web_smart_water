@@ -201,7 +201,7 @@ class AppController extends GetxController{
         print('get token error');
         isLoading.value = false;
         Future.delayed(Duration.zero).then((value) =>
-            Get.offAllNamed('/danh_sach_duong_pho'));
+            Get.offAllNamed('/login'));
       }
     }catch(e){
       print('error');
