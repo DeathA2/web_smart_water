@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
 
 
-mixin CustomerView {
+mixin CustomerEachStreetView {
   Map<String, dynamic> getView() {
     return {
       'edit_view':{
         'fields':[
-          {
-            'field':'username',
-            'label':'Nhân viên ghi số',
-            'type':'text_field',
-            'span':6,
-            'required':true,
-            'readOnly':true
-          },
-          {
-            'field':'stress',
-            'label':'Mã tên đường',
-            'type':'text_field',
-            'span':6,
-            'required':true,
-            'readOnly':true
-          },
           {
             'field':'idkh',
             'label':'ID khách hàng',
@@ -111,16 +95,6 @@ mixin CustomerView {
       'list_view':{
         'fields':[
           {
-            'field':'username',
-            'label':'Người ghi số',
-            'type':'text_field',
-          },
-          {
-            'field':'stress',
-            'label':'Mã đường',
-            'type':'text_field',
-          },
-          {
             'field':'idkh',
             'label':'ID khách hàng',
             'type':'text_field',
@@ -141,6 +115,16 @@ mixin CustomerView {
             'type':'text_field',
           },
           {
+            'field':'latitude',
+            'label':'Vĩ độ',
+            'type':'text_field',
+          },
+          {
+            'field':'longitude',
+            'label':'Kinh độ',
+            'type':'text_field',
+          },
+          {
             'field':'action_button',
             'label':'Thao tác',
             'type':'multiple_button',
@@ -151,11 +135,6 @@ mixin CustomerView {
                 'icon':Icons.remove_red_eye
               },
               {
-                'type':'edit',
-                'label':'Sửa',
-                'icon':Icons.edit
-              },
-              {
                 'type':'delete',
                 'label':'Xóa',
                 'icon':Icons.delete
@@ -164,24 +143,14 @@ mixin CustomerView {
           },
         ],
         'buttons':[
-          {
-            'type':'create',
-            'label':'Tạo',
-            'icon':Icons.add
-          },
-          {
-            'type':'import',
-            'label':'Nhập',
-            'icon':Icons.upload_file
-          },
-          {
-            'type':'export',
-            'label':'Xuất',
-            'icon':Icons.download_outlined
-          },
+          // {
+          //   'type':'create',
+          //   'label':'Tạo',
+          //   'icon':Icons.add
+          // }
         ],
         'show_search':false,
-        'field_filter':['username'
+        'field_filter':[
         ]
       }
     };

@@ -1,5 +1,6 @@
 import 'package:intl/date_symbol_data_http_request.dart';
 import 'package:web_smart_water/api/api.dart';
+import 'package:web_smart_water/model/luong/street_model/each_street_view.dart';
 import 'package:web_smart_water/model/luong/street_model/street_view.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/data.dart';
 
@@ -256,4 +257,124 @@ class CustomersModel extends TemplateModel with CustomerView {
   Future<bool> delete() async {
     return await api.deleteDataCustomer(data['stress'], data['danhbo']);
   }
+}
+
+
+class CustomersEachStreetModel extends TemplateModel with CustomerEachStreetView {
+  late int idkh;
+  late String danhbo;
+  late String sdt;
+  late String tenkh;
+  late String diachi;
+  late String loaigia;
+  late String serialmodule;
+  late String serialdh;
+  late String hieudh;
+  late String kichcodh;
+  late String vitridh;
+  late String longitude;
+  late String latitude;
+  late int sonk;
+  late String beforevalue;
+  late String baforetime;
+
+  CustomersEachStreetModel(
+      {this.idkh = 0,
+        this.danhbo = '',
+        this.sdt = '',
+        this.tenkh = '',
+        this.diachi = '',
+        this.loaigia = '',
+        this.serialmodule = '',
+        this.serialdh = '',
+        this.hieudh = '',
+        this.kichcodh = '',
+        this.vitridh = '',
+        this.longitude = '',
+        this.latitude = '',
+        this.sonk = 0,
+        this.beforevalue = '',
+        this.baforetime = ''}) {
+    initValue();
+  }
+
+  CustomersEachStreetModel.fromJson(Map<String, dynamic> json) {
+    updateData(json);
+    initValue();
+  }
+
+  Map<String, dynamic> toJson() {
+    return data;
+  }
+
+  @override
+  void initValue() {
+    data['idkh'] = idkh;
+    data['danhbo'] = danhbo;
+    data['sdt'] = sdt;
+    data['tenkh'] = tenkh;
+    data['diachi'] = diachi;
+    data['loaigia'] = loaigia;
+    data['serialmodule'] = serialmodule;
+    data['serialdh'] = serialdh;
+    data['hieudh'] = hieudh;
+    data['kichcodh'] = kichcodh;
+    data['vitridh'] = vitridh;
+    data['longitude'] = longitude;
+    data['latitude'] = latitude;
+    data['sonk'] = sonk;
+    data['beforevalue'] = beforevalue;
+    data['baforetime'] = baforetime;
+    super.initValue();
+  }
+
+  @override
+  updateData(Map<String, dynamic> json) {
+    idkh = json['idkh'] ?? 0;
+    danhbo = json['danhbo'] ?? '';
+    sdt = json['sdt'] ?? '';
+    tenkh = json['tenkh'] ?? '';
+    diachi = json['diachi'] ?? '';
+    loaigia = json['loaigia'] ?? '';
+    serialmodule = json['serialmodule'] ?? '';
+    serialdh = json['serialdh'] ?? '';
+    hieudh = json['hieudh'] ?? '';
+    kichcodh = json['kichcodh'] ?? '';
+    vitridh = json['vitridh'] ?? '';
+    longitude = json['longitude'] ?? '';
+    latitude = json['latitude'] ?? '';
+    sonk = json['sonk'] ?? 0;
+    beforevalue = json['beforevalue'] ?? '';
+    baforetime = json['baforetime'] ?? '';
+  }
+
+  @override
+  String getModelName() {
+    // TODO: implement getModelName
+    return 'Danh sách khách hàng';
+  }
+
+  @override
+  CustomersEachStreetModel getEmptyModel() {
+    return CustomersEachStreetModel();
+  }
+
+  // @override
+  // Future<bool> create() async {
+  //   data.remove('beforevalue');
+  //   data.remove('baforetime');
+  //   return await api.createEditDataCustomer(data);
+  // }
+  //
+  // @override
+  // Future<bool> update() async {
+  //   data.remove('beforevalue');
+  //   data.remove('baforetime');
+  //   return await api.createEditDataCustomer(data);
+  // }
+  //
+  // @override
+  // Future<bool> delete() async {
+  //   return await api.deleteDataCustomer(data['stress'], data['danhbo']);
+  // }
 }
