@@ -63,10 +63,6 @@ class TemplateModel with TemplateView{
     return getView()['edit_view'];
   }
 
-  Map<dynamic,dynamic> getCreateViewTemplate(){
-    return getView()['create_view'];
-  }
-
   bool isFilter(String field,[bool isReport = false]){
     if(!isReport) {
       if (getListViewTemplate()['field_filter'] == null) {
