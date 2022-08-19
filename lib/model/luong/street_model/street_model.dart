@@ -261,6 +261,7 @@ class CustomersModel extends TemplateModel with CustomerView {
 
 
 class CustomersEachStreetModel extends TemplateModel with CustomerEachStreetView {
+  int stt = 0;
   late int idkh;
   late String danhbo;
   late String sdt;
@@ -309,6 +310,7 @@ class CustomersEachStreetModel extends TemplateModel with CustomerEachStreetView
 
   @override
   void initValue() {
+    data['stt'] = stt;
     data['idkh'] = idkh;
     data['danhbo'] = danhbo;
     data['sdt'] = sdt;
@@ -330,6 +332,8 @@ class CustomersEachStreetModel extends TemplateModel with CustomerEachStreetView
 
   @override
   updateData(Map<String, dynamic> json) {
+    Street.countCustomer++;
+    stt = Street.countCustomer;
     idkh = json['idkh'] ?? 0;
     danhbo = json['danhbo'] ?? '';
     sdt = json['sdt'] ?? '';
@@ -359,20 +363,6 @@ class CustomersEachStreetModel extends TemplateModel with CustomerEachStreetView
     return CustomersEachStreetModel();
   }
 
-  // @override
-  // Future<bool> create() async {
-  //   data.remove('beforevalue');
-  //   data.remove('baforetime');
-  //   return await api.createEditDataCustomer(data);
-  // }
-  //
-  // @override
-  // Future<bool> update() async {
-  //   data.remove('beforevalue');
-  //   data.remove('baforetime');
-  //   return await api.createEditDataCustomer(data);
-  // }
-  //
   // @override
   // Future<bool> delete() async {
   //   return await api.deleteDataCustomer(data['stress'], data['danhbo']);

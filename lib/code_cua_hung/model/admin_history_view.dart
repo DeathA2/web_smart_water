@@ -57,13 +57,19 @@ mixin AdminHistoryView {
             'type':'text_field',
             'span':12,
           },
+          {
+            'field':'lastestTime',
+            'label':'Thời gian chỉnh sửa',
+            'type':'text_field',
+            'span':12,
+          },
         ],
       },
       'list_view':{
         'fields':[
           {
             'field':'username',
-            'label':'username',
+            'label':'Nhân viên',
             'type':'text_field',
           },
           {
@@ -99,6 +105,11 @@ mixin AdminHistoryView {
           {
             'field':'createdTime',
             'label':'Thời gian tạo',
+            'type':'text_field',
+          },
+          {
+            'field':'lastestTime',
+            'label':'Thời gian chỉnh sửa',
             'type':'text_field',
           },
         ],

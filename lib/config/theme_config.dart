@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThemeConfig{
-  static Color primaryColor = const Color(0xff3459e6);
+  // static Color primaryColor = const Color(0xff3459e6);
+  static Color primaryColor = const Color(0xff2C3E50);
   static Color hoverTextColor = const Color(0xff4a80ff);
   static Color secondColor = const Color(0xffD0A554);
   static Color backgroundColor =Colors.white;

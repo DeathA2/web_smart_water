@@ -62,7 +62,17 @@ mixin StreetsView {
             'type':'create',
             'label':'Tạo',
             'icon':Icons.add
-          }
+          },
+          {
+            'type':'import',
+            'label':'Nhập',
+            'icon':Icons.upload_file
+          },
+          {
+            'type':'export',
+            'label':'Xuất',
+            'icon':Icons.download_outlined
+          },
         ],
         'show_search':false,
         'field_filter':[

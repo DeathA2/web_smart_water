@@ -2,7 +2,7 @@ import 'package:web_smart_water/model/template/template_model.dart';
 import '../../api/api.dart';
 import 'admin_history_view.dart';
 
-class ModelListAdminHistory extends TemplateModel with AdminHistoryView{
+class ModelListAdminHistory extends TemplateModel with AdminHistoryView {
   late String username;
   late int idkh;
   late String tenkh;
@@ -11,9 +11,18 @@ class ModelListAdminHistory extends TemplateModel with AdminHistoryView{
   late String tendp;
   late String type;
   late String createdTime;
+  late String lastestTime;
 
   ModelListAdminHistory(
-      {this.username = '', this.idkh = 0, this.tenkh = '', this.diachi = '', this.madp ='', this.tendp = '',this.type='', this.createdTime=''}){
+      {this.username = '',
+      this.idkh = 0,
+      this.tenkh = '',
+      this.diachi = '',
+      this.madp = '',
+      this.tendp = '',
+      this.type = '',
+      this.createdTime = '',
+      this.lastestTime = ''}) {
     initValue();
   }
 
@@ -28,28 +37,30 @@ class ModelListAdminHistory extends TemplateModel with AdminHistoryView{
   }
 
   @override
-  void initValue(){
-    data['username']  = username;
-    data['idkh']       = idkh;
-    data['tenkh']      = tenkh;
+  void initValue() {
+    data['username'] = username;
+    data['idkh'] = idkh;
+    data['tenkh'] = tenkh;
     data['diachi'] = diachi;
     data['madp'] = madp;
     data['tendp'] = tendp;
     data['type'] = type;
     data['createdTime'] = createdTime;
+    data['lastestTime'] = lastestTime;
     super.initValue();
   }
 
   @override
   updateData(Map<String, dynamic> json) {
-    username  = json['username']??'';
-    idkh = json['orderCustomer']['idkh']??0;
-    tenkh = json['orderCustomer']['tenkh']??'';
-    diachi = json['orderCustomer']['diachi']??'';
-    madp = json['orderCustomer']['madp']??'';
-    tendp = json['orderCustomer']['tendp']??'';
-    type  = json['type']??'';
-    createdTime  = json['createdTime']??'';
+    username = json['username'] ?? '';
+    idkh = json['orderCustomer']['idkh'] ?? 0;
+    tenkh = json['orderCustomer']['tenkh'] ?? '';
+    diachi = json['orderCustomer']['diachi'] ?? '';
+    madp = json['orderCustomer']['madp'] ?? '';
+    tendp = json['orderCustomer']['tendp'] ?? '';
+    type = json['type'] ?? '';
+    createdTime = json['createdTime'] ?? '';
+    lastestTime = json['lastestTime'] ?? '';
   }
 
   @override
@@ -63,7 +74,7 @@ class ModelListAdminHistory extends TemplateModel with AdminHistoryView{
   }
 
   @override
-  ModelListAdminHistory fromJson(e){
+  ModelListAdminHistory fromJson(e) {
     ModelListAdminHistory myModel = ModelListAdminHistory();
     myModel.updateData(e);
     myModel.initValue();

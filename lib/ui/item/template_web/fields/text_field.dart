@@ -22,7 +22,6 @@ class MyTextField extends StatelessWidget {
   final bool showLabel;
   @override
   Widget build(BuildContext context) {
-    model.data.remove('customers');
     return (view.compareTo('edit') == 0 || view.compareTo('create') == 0)
         ? _buildFieldEdit()
         : _buildFieldList();
@@ -41,8 +40,8 @@ class MyTextField extends StatelessWidget {
             readOnly: (view.compareTo('edit') == 0)
                 ? field['readOnly'] ?? false
                 : false,
-            contendPadding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            // contendPadding:
+            //     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             title: Container(
               alignment: Alignment.center,
               width: Get.width * 0.1,

@@ -24,7 +24,7 @@ class MyCreateView extends StatelessWidget{
             const LoadingScreen()
         :Container(
           width: model.getEditViewTemplate()['width']??Get.width * 0.5,
-          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 50),
+          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,11 +41,17 @@ class MyCreateView extends StatelessWidget{
   }
 
   Widget _buildListButton(context){
-    return Row(
+    return (Get.width >= 550) ? Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSaveButton(context),
         SizedBox(width: ThemeConfig.defaultPadding,),
+        _buildCancelButton(context)
+      ],
+    ) : Column(
+      children: [
+        _buildSaveButton(context),
+        SizedBox(height: ThemeConfig.defaultPadding/2,),
         _buildCancelButton(context)
       ],
     );

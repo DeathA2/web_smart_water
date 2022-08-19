@@ -14,16 +14,16 @@ import '../ui/screen/main/permission_denied.dart';
 class RouteConfig{
   static final List<RouteToPage> _routeToPage = [
     RouteToPage(name: '/', page: const SplashScreen(),roles: []),
-    // RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
+    RouteToPage(name: '/permission_denied', page: const PermissionDeniedScreen(),roles: []),
     RouteToPage(name: '/login', page: const LogInPage(), roles: []
     ),
     RouteToPage(name: '/home', page: HomeScreen(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh', page: Container(),roles: ['admin','operation','manager']),
-    RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
+    // RouteToPage(name: '/cau_hinh_danh_muc', page: Container(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/cau_hinh_tai_khoan', page: ConfigAccountScreen(),roles: ['admin']),
-    RouteToPage(name: '/danh_sach_duong_pho', page: ListStreetsScreen(),roles: []),
-    RouteToPage(name: '/danh_sach_khach_hang', page: ListCustomersScreen(),roles: []),
-    RouteToPage(name: '/type', page: TypeScreen(),roles: []),
+    RouteToPage(name: '/danh_sach_duong_pho', page: ListStreetsScreen(),roles: ['admin']),
+    RouteToPage(name: '/danh_sach_khach_hang', page: ListCustomersScreen(),roles: ['admin','operation']),
+    RouteToPage(name: '/type', page: TypeScreen(),roles: ['admin','operation','manager']),
     RouteToPage(name: '/admin_history', page: AdminHistoryView(),roles: ['admin']),
   ];
   final List<GetPage> _route = _routeToPage.map((route) => GetPage(name: route.name, page: () => route.page)).toList();
@@ -69,9 +69,9 @@ class RouteConfig{
       listRouteToPage.addAll(_routeToPage.where((element) => element.name == model.route).toList());
       if(listRouteToPage.isNotEmpty){
         RouteToPage route = listRouteToPage.first;
-        // if(route.roles.isEmpty || route.roles.contains(appController.role)){
+        if(route.roles.isEmpty || route.roles.contains(appController.role)){
           list.add(model);
-        // }
+        }
       }
     }
     return list;

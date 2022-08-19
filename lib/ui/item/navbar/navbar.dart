@@ -72,7 +72,7 @@ class _NavbarItemState extends State<NavbarItem> {
   }
 
   Widget _buildListRightButton(){
-    final RouteModel route = RouteModel(route: '/admin', label: 'admin',group: '/admin',children: [
+    final RouteModel route = RouteModel(route: '/admin', label: appController.user,group: '/admin',children: [
         RouteModel(route: '/logout', label: 'Đăng xuất',group: '/admin',children: [],screen: Container())
     ],screen: Container());
     return GestureDetector(

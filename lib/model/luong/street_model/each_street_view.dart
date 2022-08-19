@@ -95,6 +95,11 @@ mixin CustomerEachStreetView {
       'list_view':{
         'fields':[
           {
+            'field':'stt',
+            'label':'STT',
+            'type':'text_field',
+          },
+          {
             'field':'idkh',
             'label':'ID khách hàng',
             'type':'text_field',

@@ -55,6 +55,7 @@ class _MyDropdown2State extends State<MyDropdown2> {
             )).toList(),
           )):
           Expanded(child: DropdownButtonFormField(
+            isExpanded: true,
             hint: Text(widget.hintext,style: TextStyle(fontSize: ThemeConfig.labelSize),),
             decoration: InputDecoration(
               errorMaxLines: 1,

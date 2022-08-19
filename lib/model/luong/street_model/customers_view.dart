@@ -9,7 +9,8 @@ mixin CustomerView {
           {
             'field':'username',
             'label':'Nhân viên ghi số',
-            'type':'text_field',
+            'type':'dropdown',
+            'list_string':'user',
             'span':6,
             'required':true,
             'readOnly':true
@@ -26,19 +27,13 @@ mixin CustomerView {
             'field':'idkh',
             'label':'ID khách hàng',
             'type':'text_field',
-            'span':12,
+            'span':6,
           },
           {
             'field':'danhbo',
             'label':'Danh bộ',
             'type':'text_field',
-            'span':12,
-          },
-          {
-            'field':'sdt',
-            'label':'Số điện thoại',
-            'type':'text_field',
-            'span':12,
+            'span':6,
           },
           {
             'field':'tenkh',
@@ -53,10 +48,16 @@ mixin CustomerView {
             'span':12,
           },
           {
+            'field':'sdt',
+            'label':'Số điện thoại',
+            'type':'text_field',
+            'span':6,
+          },
+          {
             'field':'loaigia',
             'label':'Loại giá',
             'type':'text_field',
-            'span':12,
+            'span':6,
           },
           {
             'field':'serialmodule',
@@ -86,25 +87,25 @@ mixin CustomerView {
             'field':'vitridh',
             'label':'Vị trí đồng hồ',
             'type':'text_field',
-            'span':12,
-          },
-          {
-            'field':'longitude',
-            'label':'Kinh độ',
-            'type':'text_field',
-            'span':12,
-          },
-          {
-            'field':'latitude',
-            'label':'Vĩ độ',
-            'type':'text_field',
-            'span':12,
+            'span':6,
           },
           {
             'field':'sonk',
             'label':'Số nk',
             'type':'text_field',
-            'span':12,
+            'span':6,
+          },
+          {
+            'field':'longitude',
+            'label':'Kinh độ',
+            'type':'text_field',
+            'span':6,
+          },
+          {
+            'field':'latitude',
+            'label':'Vĩ độ',
+            'type':'text_field',
+            'span':6,
           },
         ],
       },
@@ -169,16 +170,16 @@ mixin CustomerView {
             'label':'Tạo',
             'icon':Icons.add
           },
-          {
-            'type':'import',
-            'label':'Nhập',
-            'icon':Icons.upload_file
-          },
-          {
-            'type':'export',
-            'label':'Xuất',
-            'icon':Icons.download_outlined
-          },
+          // {
+          //   'type':'import',
+          //   'label':'Nhập',
+          //   'icon':Icons.upload_file
+          // },
+          // {
+          //   'type':'export',
+          //   'label':'Xuất',
+          //   'icon':Icons.download_outlined
+          // },
         ],
         'show_search':false,
         'field_filter':['username'

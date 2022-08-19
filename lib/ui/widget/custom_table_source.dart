@@ -213,7 +213,7 @@ class CustomDataSource extends DataGridSource {
             },
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: ThemeConfig.defaultPadding/4),
-              child: Icon(e['icon'],color: e['color']??ThemeConfig.buttonPrimary,size: ThemeConfig.defaultSize,),
+              child: Icon(e['icon'],color: e['color']??ThemeConfig.primaryColor,size: ThemeConfig.defaultSize,),
             ),
           ),
         )).toList(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:web_smart_water/api/api.dart';
+import 'package:web_smart_water/code_cua_hung/model/account_model.dart';
+import 'package:web_smart_water/config/list_string_config.dart';
 import 'package:web_smart_water/model/luong/street_model/street_model.dart';
 import 'package:web_smart_water/ui/item/template_web/list_view/list_view.dart';
 import 'package:web_smart_water/ui/screen/luong_smart_water/data.dart';
@@ -15,9 +17,16 @@ class ListCustomersScreen extends StatefulWidget {
 
 class _ListCustomersScreenState extends State<ListCustomersScreen> {
   Future<List<CustomersModel>> getData() async {
+
+    List<dynamic> accounts = await api.getListAccountConfig();
+    for (var user in accounts){
+      // Map users = ListStringConfig.listString['user'];
+      ListStringConfig.listString['user'].addAll({user['user']:user['user']});
+    }
+
+
     User.customer = {};
     List<dynamic> data = await api.getListCustomerForEachAdmin();
-    List<dynamic> streets = [];
     List<dynamic> customers = [];
     var name = '';
     for (var user in data) {

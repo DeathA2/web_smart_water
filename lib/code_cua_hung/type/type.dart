@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:web_smart_water/code_cua_hung/type/type_view.dart';
 import '../../config/theme_config.dart';
@@ -18,8 +20,8 @@ class TypeScreen extends StatelessWidget{
         _buildTitle(),
         SizedBox(height: ThemeConfig.defaultPadding/2,),
         LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: (Get.width >= 1000) ? 100 : 0, vertical: (Get.width >= 1000) ? 10 : 0),
             child: ListTypeView(),
           );
         })
